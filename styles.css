@@ -6,7 +6,7 @@
     /* Secondary Colors || Electric Violet Razzmatazz */
     --secondary-color: #963CFF;
     --accent-color: #E90052;
-    
+
     /* Neutral Color || White */
     --neutral-color: #FFFFFF;
 }
@@ -15,29 +15,35 @@
 .site-header {
     background: var(--neutral-color);
     color: var(--primary-color);
-    border-bottom: 1px solid rgba(61,25,91,0.06);
+    border-bottom: 1px solid rgba(61, 25, 91, 0.06);
 }
+
 .site-header .navbar {
     padding: 0;
 }
+
 .site-header .navbar-brand img {
     height: 48px;
 }
+
 .site-header .nav-link {
     color: var(--primary-color);
 }
+
 .site-header .nav-link:hover {
     color: var(--secondary-color);
 }
+
 .site-header .btn-outline-primary {
     color: var(--primary-color);
-    border-color: rgba(61,25,91,0.18);
+    border-color: rgba(61, 25, 91, 0.18);
 }
 
 /* Cards and accents */
 .card {
     border-radius: 0.6rem;
 }
+
 .card .card-title {
     color: var(--primary-color);
 }
@@ -46,11 +52,15 @@
 .error-404 {
     letter-spacing: -0.02em;
 }
+
 .error-404 .soccer-ball {
     display: inline-block;
-    font-size: 0.85em; /* slightly smaller than digits so it sits visually centered */
+    font-size: 0.85em;
+    
+    /* slightly smaller than digits so it sits visually centered */
     margin: 0 0.25rem;
-    transform: translateY(0.06em); /* nudge visually */
+    transform: translateY(0.06em);
+    /* nudge visually */
 }
 
 /* Not Sure if this is allowed but I had the idea  */
@@ -68,7 +78,9 @@
 
 /* Small responsive tweaks */
 @media (max-width: 767px) {
-    .site-header .navbar-nav { gap: .5rem; }
+    .site-header .navbar-nav {
+        gap: .5rem;
+    }
 }
 
 /* Subtle page background */
@@ -77,16 +89,20 @@ body.bg-light {
 }
 
 /* make footer stick to bottom when content is short */
-html, body {
+html,
+body {
     height: 100%;
 }
+
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
+
 main {
-    flex: 1 0 auto; /* allow main to grow and push footer to bottom */
+    flex: 1 0 auto;
+    /* allow main to grow and push footer to bottom */
 }
 
 /* Footer styles */
@@ -95,24 +111,36 @@ main {
     color: #fff;
     width: 100%;
 }
+
 .site-footer .footer-link {
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
 }
+
 .site-footer .footer-link:hover {
     color: var(--secondary-color);
     text-decoration: underline;
 }
-.site-footer img { filter: none; }
-.site-footer .text-white-50 { color: rgba(255,255,255,0.75) !important; }
+
+.site-footer img {
+    filter: none;
+}
+
+.site-footer .text-white-50 {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
 
 @media (max-width: 575px) {
-    .site-footer .col-md-4 { text-align: center; }
-    .site-footer .col-md-4.d-flex { justify-content: center; }
+    .site-footer .col-md-4 {
+        text-align: center;
+    }
+
+    .site-footer .col-md-4.d-flex {
+        justify-content: center;
+    }
 }
 
 /* ball element (single DOM node used both inline and inside the field) */
-
 #ball {
     --ani: roll 1s linear infinite;
     width: 40px;
@@ -123,8 +151,10 @@ main {
     text-align: center;
     vertical-align: middle;
     font-size: 28px;
-    pointer-events: none; /* when inline we don't want pointer capture */
-    position: relative; /* so pseudo-elements position against the ball */
+    pointer-events: none;
+    /* when inline we don't want pointer capture */
+    position: relative;
+    /* so pseudo-elements position against the ball */
 }
 
 /* when the ball is moved into the field for animation we add .in-field (JS) */
@@ -135,46 +165,77 @@ main {
 }
 
 /* decorative layers copied from original for the soccer-ball look */
-#ball:before{
+#ball:before {
     content: '';
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    position: absolute; 
+    position: absolute;
     left: 0%;
     top: 0%;
     mix-blend-mode: multiply;
 }
-#ball:after{
+
+#ball:after {
     content: '';
     width: 40px;
     height: 40px;
     background: url(http://upload.wikimedia.org/wikipedia/en/e/ec/Soccer_ball.svg);
     background-size: 100% 100%;
     border-radius: 50%;
-    position: absolute; 
+    position: absolute;
     left: 0;
     top: 0;
 }
 
 /* slight idle bounce so the inline ball feels "alive" */
 @keyframes bob {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-6%); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6%);
+    }
 }
-#ball:not(.in-field) { animation: bob 2.5s ease-in-out infinite; }
+
+#ball:not(.in-field) {
+    animation: bob 2.5s ease-in-out infinite;
+}
 
 /* rolling animation (used when you add a .kicked class via JS) */
 @keyframes roll {
-  100% { transform: rotate(1080deg); }
+    100% {
+        transform: rotate(1080deg);
+    }
 }
-.kicked:after { animation: var(--ani); }
+
+.kicked:after {
+    animation: var(--ani);
+}
 
 /* optional: simple fall/score states (can be used by JS later) */
-.fall { animation: fall .5s linear .5s forwards; }
-@keyframes fall { 100% { top: 250px; } }
-.goal { animation: score .5s linear .5s forwards; }
-@keyframes score { 100% { top: 200px; } }
+.fall {
+    animation: fall .5s linear .5s forwards;
+}
+
+@keyframes fall {
+    100% {
+        top: 250px;
+    }
+}
+
+.goal {
+    animation: score .5s linear .5s forwards;
+}
+
+@keyframes score {
+    100% {
+        top: 200px;
+    }
+}
 
 #goal {
     height: 250px;
@@ -192,8 +253,13 @@ main {
 }
 
 @keyframes shake {
-    25% { transform: rotate(1deg); }
-    75% { transform: rotate(-1deg); }
+    25% {
+        transform: rotate(1deg);
+    }
+
+    75% {
+        transform: rotate(-1deg);
+    }
 }
 
 /* Hitboxes (invisible click areas) */
@@ -204,6 +270,7 @@ main {
     left: 0;
     bottom: 0;
 }
+
 .hitbox[box="1"] {
     width: 175px;
     height: 125px;
@@ -211,6 +278,7 @@ main {
     left: 0;
     top: 0;
 }
+
 .hitbox[box="2"] {
     width: 140px;
     height: 175px;
@@ -218,6 +286,7 @@ main {
     left: calc(50% - 70px);
     top: 0;
 }
+
 .hitbox[box="3"] {
     width: 175px;
     height: 125px;
@@ -225,6 +294,7 @@ main {
     right: 0;
     top: 0;
 }
+
 .hitbox[box="4"] {
     width: 175px;
     height: 125px;
@@ -239,5 +309,6 @@ main {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    opacity: 0; /* invisible but functional */
+    opacity: 0;
+    /* invisible but functional */
 }
