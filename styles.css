@@ -274,7 +274,7 @@ main {
 }
 
 /* Hitboxes copied from site */
-.hitbox[box="0"] {
+.hitbox[data-box="0"] {
     width: 175px;
     height: 125px;
     position: absolute;
@@ -282,7 +282,7 @@ main {
     bottom: 0;
 }
 
-.hitbox[box="1"] {
+.hitbox[data-box="1"] {
     width: 175px;
     height: 125px;
     position: absolute;
@@ -290,7 +290,7 @@ main {
     top: 0;
 }
 
-.hitbox[box="2"] {
+.hitbox[data-box="2"] {
     width: 140px;
     height: 175px;
     position: absolute;
@@ -298,7 +298,7 @@ main {
     top: 0;
 }
 
-.hitbox[box="3"] {
+.hitbox[data-box="3"] {
     width: 175px;
     height: 125px;
     position: absolute;
@@ -306,7 +306,7 @@ main {
     top: 0;
 }
 
-.hitbox[box="4"] {
+.hitbox[data-box="4"] {
     width: 175px;
     height: 125px;
     position: absolute;
