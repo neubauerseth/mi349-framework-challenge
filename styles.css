@@ -3,7 +3,7 @@
     /* Primary Color || Purple */
     --primary-color: #3D195B;
 
-    /* Secondary Colors || Electric Violet Razzmatazz */
+    /* Secondary Colors || Electric Violet + Razzmatazz */
     --secondary-color: #963CFF;
     --accent-color: #E90052;
 
@@ -34,63 +34,23 @@
     color: var(--secondary-color);
 }
 
-.site-header .btn-outline-primary {
-    color: var(--primary-color);
-    border-color: rgba(61, 25, 91, 0.18);
-}
-
 /* Cards and accents */
 .card {
     border-radius: 0.6rem;
 }
 
-.card .card-title {
-    color: var(--primary-color);
-}
 
 /* 404 styles */
 .error-404 {
     letter-spacing: -0.02em;
 }
 
-.error-404 .soccer-ball {
-    display: inline-block;
-    font-size: 0.85em;
-    
-    /* slightly smaller than digits so it sits visually centered */
-    margin: 0 0.25rem;
-    transform: translateY(0.06em);
-    /* nudge visually */
-}
 
-/* Not Sure if this is allowed but I had the idea  */
-#game_field {
-    width: 100vw;
-    max-width: 1200px;
-    height: 450px;
-    background: url('https://contentservice.mc.reyrey.net/image_v1.0.0/?id=26107e19-02ae-5a04-bc21-88b57bc22ced&638600304193604811');
-    position: relative;
-    background-position: 50% 0%;
-    background-repeat: no-repeat;
-    margin: 0 auto;
-}
-
-
-/* Small responsive tweaks */
-@media (max-width: 767px) {
-    .site-header .navbar-nav {
-        gap: .5rem;
-    }
-}
-
-/* Subtle page background */
 body.bg-light {
     background-color: #fbfbfc;
 }
 
-/* make footer stick to bottom when content is short */
-html,
-body {
+html, body {
     height: 100%;
 }
 
@@ -102,7 +62,6 @@ body {
 
 main {
     flex: 1 0 auto;
-    /* allow main to grow and push footer to bottom */
 }
 
 /* Footer styles */
@@ -126,10 +85,6 @@ main {
     filter: none;
 }
 
-.site-footer .text-white-50 {
-    color: rgba(255, 255, 255, 0.75) !important;
-}
-
 @media (max-width: 575px) {
     .site-footer .col-md-4 {
         text-align: center;
@@ -140,7 +95,26 @@ main {
     }
 }
 
-/* ball element (single DOM node used both inline and inside the field) */
+/* copied from https://www.codetap.org/project/goal-game */
+#game_field {
+    width: 100vw;
+    max-width: 1200px;
+    height: 450px;
+    background: url('https://contentservice.mc.reyrey.net/image_v1.0.0/?id=26107e19-02ae-5a04-bc21-88b57bc22ced&638600304193604811');
+    position: relative;
+    background-position: 50% 0%;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+}
+
+
+@media (max-width: 767px) {
+    .site-header .navbar-nav {
+        gap: .5rem;
+    }
+}
+
+/* copied from site */
 #ball {
     --ani: roll 1s linear infinite;
     width: 40px;
@@ -152,19 +126,16 @@ main {
     vertical-align: middle;
     font-size: 28px;
     pointer-events: none;
-    /* when inline we don't want pointer capture */
     position: relative;
-    /* so pseudo-elements position against the ball */
 }
 
-/* when the ball is moved into the field for animation we add .in-field (JS) */
+/* copied from site */
 .in-field {
     position: absolute;
     pointer-events: none;
-    /* allow :after animation to run when kicked */
 }
 
-/* decorative layers copied from original for the soccer-ball look */
+/* copied from site */
 #ball:before {
     content: '';
     width: 40px;
@@ -176,6 +147,7 @@ main {
     mix-blend-mode: multiply;
 }
 
+/* copied from site */
 #ball:after {
     content: '';
     width: 40px;
@@ -188,7 +160,6 @@ main {
     top: 0;
 }
 
-/* slight idle bounce so the inline ball feels "alive" */
 @keyframes bob {
 
     0%,
@@ -201,22 +172,23 @@ main {
     }
 }
 
+/* copied from site */
 #ball:not(.in-field) {
     animation: bob 2.5s ease-in-out infinite;
 }
 
-/* rolling animation (used when you add a .kicked class via JS) */
 @keyframes roll {
     100% {
         transform: rotate(1080deg);
     }
 }
 
+/* copied from site */
 .kicked:after {
     animation: var(--ani);
 }
 
-/* optional: simple fall/score states (can be used by JS later) */
+/* copied from site */
 .fall {
     animation: fall .5s linear .5s forwards;
 }
@@ -227,6 +199,7 @@ main {
     }
 }
 
+/* copied from site */
 .goal {
     animation: score .5s linear .5s forwards;
 }
@@ -237,6 +210,7 @@ main {
     }
 }
 
+/* copied from site */
 #goal {
     height: 250px;
     aspect-ratio: 2/1;
@@ -252,6 +226,43 @@ main {
     transform-origin: 50% 100%;
 }
 
+/* Scoreboard styles */
+.scoreboard {
+    display: flex;
+    justify-content: center;
+}
+
+.scoreboard .d-flex {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    overflow-x: auto;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+}
+.score-card {
+    min-width: 220px;
+    max-width: 320px;
+    flex: 0 0 auto;
+    border-radius: 0.6rem;
+}
+.score-card .card-body {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.team-name { font-size: 0.95rem; white-space: nowrap; }
+.score { font-weight: 700; font-size: 1.1rem; color: var(--primary-color); }
+
+.team-badge { display: none !important; }
+
+.scoreboard .d-flex .score-card:nth-child(n+5) { display: none !important; }
+
+.scoreboard .d-flex::-webkit-scrollbar { height: 8px; }
+.scoreboard .d-flex::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 999px; }
+
 @keyframes shake {
     25% {
         transform: rotate(1deg);
@@ -262,7 +273,7 @@ main {
     }
 }
 
-/* Hitboxes (invisible click areas) */
+/* Hitboxes copied from site */
 .hitbox[box="0"] {
     width: 175px;
     height: 125px;
@@ -303,12 +314,10 @@ main {
     bottom: 0;
 }
 
-/* SVG (hidden but required for animation path) */
 #svg {
     position: absolute;
     width: 100%;
     height: 100%;
     pointer-events: none;
     opacity: 0;
-    /* invisible but functional */
 }
